@@ -1,2 +1,2 @@
 # RockPaperScissors
-Console based rock paper scissors. Made in HTML and JavaSript.
+Rock paper scissors with a UI. Made in HTML, CSS and JavaScript.

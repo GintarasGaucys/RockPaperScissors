@@ -1,6 +1,15 @@
 let playerWins = 0;
 let computerWins = 0;
 
+const result = document.querySelector("#result");
+const computer = document.querySelector("#computer");
+const playerscore = document.querySelector("#player");
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+const buttons = document.querySelectorAll("button");
+
+
 function computerPlay() {
     let moves = ["Rock", "Paper", "Scissors"];
     return moves[Math.floor(Math.random() * moves.length)];
@@ -45,19 +54,35 @@ function determineWinner(player, computer) {
     }
 }
 
+function clicked() {
+    playerscore.textContent = "Your score: " + playerWins;
+    computer.textContent = "Computer's score: " + computerWins;
+    if (playerWins == 5 || computerWins == 5) {
+        if (playerWins > computerWins) {
+            result.textContent = "You win! Press a button to play again";
+        } else {
+            result.textContent = "You lose! Press a button to play again.";
+        }
+        playerWins = 0;
+        computerWins = 0;
+    }
+}
+
 function game() {
-    for (let i = 0; i < 5; i++) {
-        console.log(determineWinner(prompt("What is your move? (rock, paper, scissors?)"), computerPlay()));
-        console.log("You score: " + playerWins);
-        console.log("Computer's score: " + computerWins);
-    }
-    if (playerWins > computerWins) {
-        console.log("You win!");
-    } else if (playerWins < computerWins) {
-        console.log("You lose!");
-    } else {
-        console.log("Tie!");
-    }
+    rock.addEventListener("click", () => {
+        result.textContent = determineWinner("rock", computerPlay());
+    });
+    paper.addEventListener("click", () => {
+        result.textContent = determineWinner("paper", computerPlay());
+    });
+    scissors.addEventListener("click", () => {
+        result.textContent = determineWinner("scissors", computerPlay());
+    });
+
+    buttons.forEach((button) => {
+        button.addEventListener("click", clicked);
+    });
+
 }
 
 game();
